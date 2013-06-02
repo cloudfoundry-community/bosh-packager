@@ -15,10 +15,11 @@ $ gem install bosh-packager
 ## Usage
 
 ```
-$ bosh-packager target BOSH_DIRECTOR_URI appcloud
+$ bosh target BOSH_DIRECTOR_URI
 Username: drnic
 Password: ***************
-$ bosh-packager apply path/to/manifest.yml [--stemcell-name bosh-stemcell] [--stemcell-version 666] \
+$ bosh packager release appcloud
+$ bosh packager apply path/to/manifest.yml [--stemcell-name bosh-stemcell] [--stemcell-version 666] \
     [--release-version 131] [--nostart] \
     [--local-blobstore /var/vcap/micro/data/cache] \
     [--local-apply-spec /var/vcap/micro/apply_spec.yml]

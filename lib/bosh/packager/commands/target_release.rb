@@ -10,6 +10,8 @@ module Bosh::Packager::Commands
     end
 
     # Checks with director that release_name exists
+    # @return [Hash] The release (keys: name, release_versions)
+    # Uses director API: get "/releases"
     def release
       @release ||= director_client.list_releases.find { |rel| rel["name"] == release_name }
     end

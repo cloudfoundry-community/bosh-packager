@@ -1,0 +1,27 @@
+language: ruby
+script: bundle exec rake spec:$SUITE
+rvm:
+  - ruby-1.9.3
+  - rbx-19mode
+  - ruby-2.0.0
+notifications:
+  email:
+    recipients:
+      - drnicwilliams@gmail.com
+    on_success: change
+    on_failure: always
+env:
+  matrix:
+    - SUITE=unit
+    - SUITE=integration
+    # - SUITE=integration:aws:edge
+    # - SUITE=integration:aws:edge_prebuilt
+    # - SUITE=integration:aws:edge_prebuilt_ami
+  global:
+    - secure: ""
+matrix:
+  allow_failures:
+    - rvm: rbx-19mode
+    # - rvm: ruby-2.0.0
+    # - env: SUITE=integration:aws:basic
+        

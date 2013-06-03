@@ -4,6 +4,8 @@ require "bosh/packager"
 
 module Bosh::Cli::Command
   class Packager < Base
+    include Bosh::Cli::Validation
+
     usage "packager"
     desc  "show packager sub-commands"
     def help
@@ -19,8 +21,12 @@ module Bosh::Cli::Command
     desc "Target specific release that will be packaged locally"
     def target_release(name)
       require "bosh/packager/commands/target_release"
-      cmd = Bosh::Packager::Commands::TargetRelease.new
-      cmd.release_name = name
+      cmd = Bosh::Packager::Commands::TargetRelease.new(director)
+      step("Release exists",
+           "Release #{name} does not exist in target bosh", :fatal) do
+        cmd.release_name = name
+        cmd.release_exists?
+      end
       cmd.perform
     end
 
